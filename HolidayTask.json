@@ -1,0 +1,43 @@
+[
+    {
+      "title": "Plan Thanksgiving Dinner",
+      "date": "2024-11-28T18:00:00Z",
+      "location": "Home",
+      "subtasks": ["Send invitations", "Buy ingredients", "Set the table"],
+      "gifts": [],
+      "task_for_who": ["Family", "Friends"],
+      "catagory": "Thanksgiving",
+      "completed": false
+    },
+    {
+      "title": "Buy Christmas Gifts",
+      "date": "2024-12-01T10:00:00Z",
+      "location": "Shopping Mall",
+      "subtasks": ["Make a gift list", "Check online deals", "Wrap gifts"],
+      "gifts": ["Toys", "Books", "Clothes"],
+      "task_for_who": ["Parents", "Siblings", "Friends"],
+      "catagory": "Christmas",
+      "completed": false
+    },
+    {
+      "title": "Plan New Year's Eve Party",
+      "date": "2024-12-31T20:00:00Z",
+      "location": "Home",
+      "subtasks": ["Send invites", "Prepare snacks", "Decorate"],
+      "gifts": [],
+      "task_for_who": ["Friends"],
+      "catagory": "New Year",
+      "completed": false
+    },
+    {
+      "title": "Organize Halloween Costume Party",
+      "date": "2024-10-31T18:00:00Z",
+      "location": "Home",
+      "subtasks": ["Pick a theme", "Buy decorations", "Make a playlist"],
+      "gifts": ["Costume accessories"],
+      "task_for_who": ["Kids", "Friends"],
+      "catagory": "Halloween",
+      "completed": false
+    }
+  ]
+  

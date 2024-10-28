@@ -1,0 +1,39 @@
+[
+    {
+      "title": "Finish Project Report",
+      "date": "2024-10-27T09:00:00Z",
+      "due_date": "2024-10-30T17:00:00Z",
+      "location": "Office",
+      "subtasks": ["Gather data", "Write introduction", "Format report"],
+      "catagory": "Work",
+      "completed": false
+    },
+    {
+      "title": "Grocery Shopping",
+      "date": "2024-10-27T10:00:00Z",
+      "due_date": "2024-10-27T15:00:00Z",
+      "location": "Supermarket",
+      "subtasks": ["Buy fruits", "Buy vegetables", "Buy snacks"],
+      "catagory": "Personal",
+      "completed": false
+    },
+    {
+      "title": "Schedule Doctor's Appointment",
+      "date": "2024-10-27T11:00:00Z",
+      "due_date": "2024-10-31T18:00:00Z",
+      "location": "Health Clinic",
+      "subtasks": ["Call clinic", "Check insurance", "Confirm time"],
+      "catagory": "Health",
+      "completed": false
+    },
+    {
+      "title": "Plan Weekend Trip",
+      "date": "2024-10-27T12:00:00Z",
+      "due_date": "2024-11-02T20:00:00Z",
+      "location": "Online",
+      "subtasks": ["Research destinations", "Book accommodation", "Pack bags"],
+      "catagory": "Leisure",
+      "completed": false
+    }
+  ]
+  
