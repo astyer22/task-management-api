@@ -12,14 +12,17 @@ POST http://localhost:3000/api/Tasks
 Content-Type: application/json
 
 {
-    "title": "Task Title",             // Title of the task (required)
-    "date": "2024-10-27",               // Task date (YYYY-MM-DD format)
-    "due_date": "2024-10-29",           // Due date of the task (YYYY-MM-DD format)
-    "location": "Task Location",        // Location of the task (required)
-    "subtasks": ["Subtask 1", "Subtask 2"], // List of subtasks (optional)
-    "category": "Task Category",        // Corrected: Category of the task (required)
-    "completed": false                   // Completion status (default: false)
+    "title": "Have Suit Dry Cleaned",
+    "date": "2024-10-28",
+    "due_date": "2024-11-05",
+    "location": "China Town",
+    "subtasks": ["Drop suit off", "Pick suit up"],
+    "category": "Laundry",
+    "completed": false
 }
+
+
+
 
 ### 
 
@@ -36,12 +39,12 @@ POST http://localhost:3000/api/HolidayTasks
 Content-Type: application/json
 
 {
-    "title": "Plan Thanksgiving Dinner", // Title of the holiday task (required)
-    "date": "2024-10-27",                 // Task date (YYYY-MM-DD format)
-    "location": "Home",                   // Location of the holiday task (optional)
-    "subtasks": ["Send invitations", "Buy ingredients", "Set the table"], // List of subtasks (optional)
-    "gifts": [],                          // List of gifts (optional)
-    "task_for_who": ["Family", "Friends"], // People the task is for (optional)
-    "category": "Thanksgiving",           // Corrected: Category of the holiday task (required)
-    "completed": false                     // Completion status (default: false)
+    "title": "Plan Thanksgiving Dinner",
+    "date": "2024-10-27",
+    "location": "Home",
+    "subtasks": ["Send invitations", "Buy ingredients", "Set the table"],
+    "gifts": [],
+    "task_for_who": ["Family", "Friends"],
+    "category": "Thanksgiving",
+    "completed": false
 }

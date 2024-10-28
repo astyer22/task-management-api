@@ -12,4 +12,4 @@ const HolidayTaskTaskSchema = new mongoose.Schema({
   completed: { type: Boolean, default: false },
 });
 
-module.exports = mongoose.model('HolidayTasks', HolidayTaskTaskSchema);
+module.exports = mongoose.model('HolidayTasks', HolidayTaskTaskSchema, 'holidaytasks');

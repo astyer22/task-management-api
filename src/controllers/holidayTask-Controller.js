@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const HolidayTasks = require('../models/HolidayTasks');
 
+
 // GET all holiday tasks
 const getAllHolidayTasks = async (req, res) => {
     try {
@@ -25,4 +26,4 @@ const createHolidayTask = async (req, res) => {
     }
 };
 
-module.exports = { getAllHolidayTasks, createHolidayTask }; // Export the functions
+module.exports = { getAllHolidayTasks, createHolidayTask }; 
