@@ -1,7 +1,4 @@
-// controllers/taskController.js
-
 const express = require('express');
-const router = express.Router();
 const Tasks = require('../models/Tasks'); 
 
 // GET all tasks
@@ -25,4 +22,41 @@ const createTask = async (req, res) => {
     }
 };
 
-module.exports = { getAllTasks, createTask }; 
+// PUT (update) a task by ID
+const updateTask = async (req, res) => {
+    const { id } = req.params;  
+    try {
+        const updatedTask = await Tasks.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+
+        if (!updatedTask) {
+            return res.status(404).json({ message: 'Task not found' });
+        }
+
+        res.json(updatedTask); 
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+// DELETE a task by ID
+const deleteTask = async (req, res) => {
+    const { id } = req.params;  
+    try {
+        const deletedTask = await Tasks.findByIdAndDelete(id);
+
+        if (!deletedTask) {
+            return res.status(404).json({ message: 'Task not found' });
+        }
+
+        res.status(204).send(); 
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+module.exports = {
+    getAllTasks,
+    createTask,
+    updateTask,   
+    deleteTask    
+};

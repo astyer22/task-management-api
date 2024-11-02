@@ -6,7 +6,7 @@ const router = express.Router();
 // Define the routes
 router.get('/Tasks', getAllTasks);
 router.post('/Tasks', createTask);
-
-
+router.put('/Tasks/:id', updateTask);
+router.delete('/Tasks/:id', deleteTask);
 
 module.exports = router;
