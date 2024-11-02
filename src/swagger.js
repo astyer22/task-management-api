@@ -13,10 +13,10 @@ const doc = {
 const outputFile = './swagger.json';
 const endpointsFiles = [
   './src/routes/tasksRoutes.js', 
-  './src/routes/holidayTasks-Routes.js' 
+  './src/routes/index.j' 
 ];
 
 // Generate the swagger documentation
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
-  require('./index.js'); // Start the server
+  require('./server.js'); // Start the server
 });
