@@ -13,7 +13,7 @@ const doc = {
 const outputFile = './swagger.json';
 const endpointsFiles = [
   './src/routes/tasksRoutes.js', 
-  './src/routes/index.j' 
+  './src/routes/holidayTasks-Routes.js' 
 ];
 
 // Generate the swagger documentation

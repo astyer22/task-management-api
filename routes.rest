@@ -2,13 +2,13 @@
 
 ### Tasks #####
 #### Get all tasks
-GET http://localhost:3000/api/Tasks
+GET http://localhost:3000/Tasks
 Accept: application/json
 
 ### 
 
 #### Create a new task
-POST http://localhost:3000/api/Tasks
+POST http://localhost:3000/Tasks
 Content-Type: application/json
 
 {
@@ -33,13 +33,13 @@ Get
 ### HolidayTasks ##### 
 
 #### Get all holiday tasks
-GET http://localhost:3000/api/HolidayTasks
+GET http://localhost:3000/HolidayTasks
 Accept: application/json
 
 ### 
 
 #### Create a new holiday task
-POST http://localhost:3000/api/HolidayTasks
+POST http://localhost:3000/HolidayTasks
 Content-Type: application/json
 
 {

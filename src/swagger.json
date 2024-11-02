@@ -13,7 +13,7 @@
   "paths": {
     "/Tasks": {
       "get": {
-        "description": "",
+        "description": "Retrieve all tasks",
         "responses": {
           "200": {
             "description": "OK"
@@ -24,7 +24,46 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new task",
+        "parameters": [
+          {
+            "name": "task",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "due_date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "location": {
+                  "type": "string"
+                },
+                "subtasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "category": {
+                  "type": "string"
+                },
+                "completed": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["title", "category"]
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -37,7 +76,7 @@
     },
     "/HolidayTasks": {
       "get": {
-        "description": "",
+        "description": "Retrieve all holiday tasks",
         "responses": {
           "200": {
             "description": "OK"
@@ -48,7 +87,54 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new holiday task",
+        "parameters": [
+          {
+            "name": "holidayTask",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "location": {
+                  "type": "string"
+                },
+                "subtasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "gifts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "task_for_who": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "category": {
+                  "type": "string"
+                },
+                "completed": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["title", "category"]
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"

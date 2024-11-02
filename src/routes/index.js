@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+// Route for Swagger documentation
 router.use('/', require('./swagger'));
-router.use('/holidayTask-Routes', require('./holidayTask-Routes'));
-router.use('/tasksRoutes', require('./tasksRoutes'));
+
+// Routes for holiday tasks
+router.use('/holidayTasks', require('./holidayTask-Routes'));
+
+// Routes for general tasks
+router.use('/tasks', require('./tasksRoutes'));
 
 module.exports = router;

@@ -13,8 +13,8 @@ connectDB();
 
 // Middleware
 app.use(express.json()); 
-app.use('/api', taskRoutes); 
-app.use('/api', holidayTask_Routes); 
+app.use('/', taskRoutes); 
+app.use('/', holidayTask_Routes); 
 
 // Start the server
 app.listen(PORT, () => {
