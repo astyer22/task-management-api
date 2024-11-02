@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllTasks, createTask } = require('../controllers/taskController'); // Ensure correct import
+const { getAllTasks, createTask, updateTask, deleteTask } = require('../controllers/taskController'); // Ensure correct import
 
 const router = express.Router();
 

@@ -10,314 +10,174 @@
   "schemes": [
     "http"
   ],
-  "paths": {
-    "/Tasks": {
-      "get": {
-        "description": "Retrieves a list of tasks.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "summary": "Create a new task",
-        "description": "Creates a new task with the provided details.",
-        "parameters": [
-          {
-            "name": "task",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "date": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "due_date": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "location": {
-                  "type": "string"
-                },
-                "subtasks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "category": {
-                  "type": "string"
-                },
-                "completed": {
-                  "type": "boolean"
-                }
-              },
-              "required": ["title", "category"]
+    "paths": {
+      "/Tasks": {
+        "get": {
+          "description": "Retrieves a list of tasks.",
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "500": {
+              "description": "Internal Server Error"
             }
           }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update an existing task",
-        "description": "Updates a task identified by its ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "task",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "date": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "due_date": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "location": {
-                  "type": "string"
-                },
-                "subtasks": {
-                  "type": "array",
-                  "items": {
+        },
+        "post": {
+          "summary": "Create a new task",
+          "description": "Creates a new task with the provided details.",
+          "parameters": [
+            {
+              "name": "task",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
                     "type": "string"
+                  },
+                  "date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "due_date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "subtasks": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "completed": {
+                    "type": "boolean"
                   }
                 },
-                "category": {
-                  "type": "string"
-                },
-                "completed": {
-                  "type": "boolean"
-                }
+                "required": ["title", "category"]
               }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Task not found"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete an existing task",
-        "description": "Deletes a task identified by its ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Task not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/HolidayTasks": {
-      "get": {
-        "description": "Retrieves a list of holiday tasks.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "summary": "Create a new holiday task",
-        "description": "Creates a new holiday task with the provided details.",
-        "parameters": [
-          {
-            "name": "holidayTask",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "date": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "location": {
-                  "type": "string"
-                },
-                "subtasks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "gifts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "task_for_who": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "category": {
-                  "type": "string"
-                },
-                "completed": {
-                  "type": "boolean"
-                }
-              },
-              "required": ["title", "category"]
+          ],
+          "responses": {
+            "201": {
+              "description": "Created"
+            },
+            "400": {
+              "description": "Bad Request"
             }
           }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
+        }
+      },
+      "/Tasks/{id}": {
+        "delete": {
+          "summary": "Delete a task by ID",
+          "description": "Deletes a task identified by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the task to delete",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "404": {
+              "description": "Task not found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
           }
         }
       },
-      "put": {
-        "summary": "Update an existing holiday task",
-        "description": "Updates a holiday task identified by its ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "holidayTask",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "date": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "location": {
-                  "type": "string"
-                },
-                "subtasks": {
-                  "type": "array",
-                  "items": {
+      "/HolidayTasks": {
+        "get": {
+          "description": "Retrieves a list of holiday tasks.",
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new holiday task",
+          "description": "Creates a new holiday task with the provided details.",
+          "parameters": [
+            {
+              "name": "holidayTask",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "description": {
                     "type": "string"
                   }
                 },
-                "gifts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "task_for_who": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "category": {
-                  "type": "string"
-                },
-                "completed": {
-                  "type": "boolean"
-                }
+                "required": ["name", "date"]
               }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Holiday task not found"
-          },
-          "400": {
-            "description": "Bad Request"
+          ],
+          "responses": {
+            "201": {
+              "description": "Created"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
           }
         }
       },
-      "delete": {
-        "summary": "Delete an existing holiday task",
-        "description": "Deletes a holiday task identified by its ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Holiday task not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+      "/HolidayTasks/{id}": {
+        "delete": {
+          "summary": "Delete a holiday task by ID",
+          "description": "Deletes a holiday task identified by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the holiday task to delete",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "404": {
+              "description": "Holiday Task not found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
           }
         }
       }
     }
   }
-}
+  

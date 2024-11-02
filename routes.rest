@@ -21,6 +21,28 @@ Content-Type: application/json
     "completed": false
 }
 
+###
+PUT http://localhost:3000/Tasks/672699ef235b00536e0be5dc
+Content-Type: application/json
+
+{
+    "title": "Walk the cat",
+    "date": "2024-10-28",
+    "due_date": "2024-11-05",
+    "location": "The park",
+    "subtasks": ["Put on the leash", "Bring poop bags"],
+    "category": "Pet",
+    "completed": false
+}
+
+###
+DELETE http://localhost:3000/Tasks/67269a8b235b00536e0be5e5
+Accept: application/json
+
+{
+    "delete": "true"
+}
+
 ### Render
 
 Get 
@@ -51,6 +73,30 @@ Content-Type: application/json
     "task_for_who": ["Daughter"],
     "category": "Birthday",
     "completed": false
+}
+
+###
+PUT http://localhost:3000/HolidayTasks/671ff7c6f35ebd8f85fbc1e0
+Content-Type: application/json
+
+{
+    "title": "Buy Boy toys",
+    "date": "2024-10-27",
+    "location": "The Mall",
+    "subtasks": ["Buy Bikes", "Buy Jacks"],
+    "gifts": [],
+    "task_for_who": ["Daughter"],
+    "category": "Birthday",
+    "completed": false
+}
+
+### 
+
+DELETE http://localhost:3000/HolidayTasks/67269a26235b00536e0be5df
+Accept: application/json
+
+{
+    "delete": "true"
 }
 
 ### Render 

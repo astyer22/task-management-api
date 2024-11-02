@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllHolidayTasks, createHolidayTask } = require('../controllers/holidayTask-Controller'); // Ensure correct import
+const { getAllHolidayTasks, createHolidayTask, updateHolidayTask, deleteHolidayTask } = require('../controllers/holidayTask-Controller'); // Ensure correct import
 
 const router = express.Router();
 
