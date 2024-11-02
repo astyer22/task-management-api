@@ -12,12 +12,12 @@ POST http://localhost:3000/Tasks
 Content-Type: application/json
 
 {
-    "title": "Have Suit Dry Cleaned",
+    "title": "Walk the dog",
     "date": "2024-10-28",
     "due_date": "2024-11-05",
-    "location": "China Town",
-    "subtasks": ["Drop suit off", "Pick suit up"],
-    "category": "Laundry",
+    "location": "The park",
+    "subtasks": ["Put on the leash", "Bring poop bags"],
+    "category": "Pet",
     "completed": false
 }
 
@@ -43,13 +43,13 @@ POST http://localhost:3000/HolidayTasks
 Content-Type: application/json
 
 {
-    "title": "Plan Thanksgiving Dinner",
+    "title": "Buy Girls toys",
     "date": "2024-10-27",
-    "location": "Home",
-    "subtasks": ["Send invitations", "Buy ingredients", "Set the table"],
+    "location": "The Mall",
+    "subtasks": ["Buy dolls", "Buy dresses"],
     "gifts": [],
-    "task_for_who": ["Family", "Friends"],
-    "category": "Thanksgiving",
+    "task_for_who": ["Daughter"],
+    "category": "Birthday",
     "completed": false
 }
 
