@@ -13,7 +13,7 @@
   "paths": {
     "/Tasks": {
       "get": {
-        "description": "Retrieve all tasks",
+        "description": "Retrieves a list of tasks.",
         "responses": {
           "200": {
             "description": "OK"
@@ -24,7 +24,8 @@
         }
       },
       "post": {
-        "description": "Create a new task",
+        "summary": "Create a new task",
+        "description": "Creates a new task with the provided details.",
         "parameters": [
           {
             "name": "task",
@@ -76,7 +77,7 @@
     },
     "/HolidayTasks": {
       "get": {
-        "description": "Retrieve all holiday tasks",
+        "description": "Retrieves a list of holiday tasks.",
         "responses": {
           "200": {
             "description": "OK"
@@ -87,7 +88,8 @@
         }
       },
       "post": {
-        "description": "Create a new holiday task",
+        "summary": "Create a new holiday task",
+        "description": "Creates a new holiday task with the provided details.",
         "parameters": [
           {
             "name": "holidayTask",
