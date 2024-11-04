@@ -58,6 +58,6 @@ const deleteHolidayTask = async (req, res) => {
 module.exports = {
     getAllHolidayTasks,
     createHolidayTask,
-    updateHolidayTask,   // Export the update function
-    deleteHolidayTask    // Export the delete function
+    updateHolidayTask,   
+    deleteHolidayTask    
 };
