@@ -42,7 +42,7 @@
                   "items": { "type": "string" }
                 },
                 "category": { "type": "string" },
-                "completed": { "type": "boolean" }
+                "completed": { "type": "boolean", "default": false}
               },
               "required": ["title", "category"]
             }
@@ -59,33 +59,9 @@
       }
     },
     "/Tasks/{id}": {
-      "get": {
-        "summary": "Get task by ID",
-        "description": "Retrieve a task by its ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ID of the task"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Task not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
       "put": {
-        "summary": "Update task by ID",
-        "description": "Updates an existing task identified by its ID.",
+        "summary": "Update task completion status by ID",
+        "description": "Updates the completion status of an existing task identified by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -95,23 +71,15 @@
             "description": "ID of the task"
           },
           {
-            "name": "task",
+            "name": "completed",
             "in": "body",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "title": { "type": "string" },
-                "date": { "type": "string", "format": "date" },
-                "due_date": { "type": "string", "format": "date" },
-                "location": { "type": "string" },
-                "subtasks": {
-                  "type": "array",
-                  "items": { "type": "string" }
-                },
-                "category": { "type": "string" },
                 "completed": { "type": "boolean" }
-              }
+              },
+              "required": ["completed"]
             }
           }
         ],
@@ -143,8 +111,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Content Deleted"
           },
           "404": {
             "description": "Task not found"
@@ -179,12 +147,16 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": { "type": "string" },
+                "title": { "type": "string" },
                 "date": { "type": "string", "format": "date" },
                 "location": { "type": "string" },
-                "description": { "type": "string" }
+                "subtasks": [{ "type": "string" }],
+                "gifts": [{ "type": "string" }],
+                "task_for_who": [{ "type": "string"}],
+                "category": { "type": "string"},
+                "completed": { "type": "boolean", "default": false }
               },
-              "required": ["name", "date"]
+              "required": ["title", "date"]
             }
           }
         ],
@@ -199,33 +171,9 @@
       }
     },
     "/HolidayTasks/{id}": {
-      "get": {
-        "summary": "Get holiday task by ID",
-        "description": "Retrieve a holiday task by its ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ID of the holiday task"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Holiday Task not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
       "put": {
-        "summary": "Update holiday task by ID",
-        "description": "Updates an existing holiday task identified by its ID.",
+        "summary": "Update holiday task completion status by ID",
+        "description": "Updates the completion status of an existing holiday task identified by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -235,17 +183,15 @@
             "description": "ID of the holiday task"
           },
           {
-            "name": "holidayTask",
+            "name": "completed",
             "in": "body",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": { "type": "string" },
-                "date": { "type": "string", "format": "date" },
-                "location": { "type": "string" },
-                "description": { "type": "string" }
-              }
+                "completed": { "type": "boolean" }
+              },
+              "required": ["completed"]
             }
           }
         ],
