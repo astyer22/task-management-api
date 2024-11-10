@@ -1,7 +1,7 @@
 // src/models/HolidayTask.js
 const mongoose = require('mongoose');
 
-const HolidayTaskTaskSchema = new mongoose.Schema({
+const HolidayTaskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   date: { type: Date, default: Date.now },
   location: { type: String, required: false },
@@ -12,4 +12,4 @@ const HolidayTaskTaskSchema = new mongoose.Schema({
   completed: { type: Boolean, default: false },
 });
 
-module.exports = mongoose.model('HolidayTasks', HolidayTaskTaskSchema, 'holidaytasks');
+module.exports = mongoose.model('HolidayTasks', HolidayTaskSchema, 'holidaytasks');

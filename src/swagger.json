@@ -8,6 +8,17 @@
   "host": "localhost:3000",
   "basePath": "/",
   "schemes": ["http"],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "authorizationUrl": "https://your-auth-server.com/oauth/authorize",
+      "tokenUrl": "https://your-auth-server.com/oauth/token",
+      "scopes": {
+        "read": "Read access to protected resources",
+        "write": "Write access to protected resources"
+      }
+    }
+  },
   "paths": {
     "/Tasks": {
       "get": {
