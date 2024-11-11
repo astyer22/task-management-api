@@ -1,14 +1,14 @@
-// src/routes/holidayTasks-Routes.js
+// routes/holidayTasksRoutes.js
 const express = require('express');
-const { getAllHolidayTasks, createHolidayTask, updateHolidayTask, deleteHolidayTask } = require('../controllers/holidayTask-Controller'); // Ensure correct import
-const isAuthenticated = require('../utils/isAuthenticated');  // Authentication middleware
+const { getAllHolidayTasks, createHolidayTask, updateHolidayTask, deleteHolidayTask } = require('../controllers/holidayTask-Controller');
+const isAuthenticated = require('../utils/isAuthenticated'); // Authentication middleware
 
 const router = express.Router();
 
-// Define the routes
-router.get('/HolidayTasks', getAllHolidayTasks);
-router.post('/HolidayTasks', createHolidayTask);
-router.put('/HolidayTasks/:id', updateHolidayTask);
-router.delete('/HolidayTasks/:id', deleteHolidayTask);
+// Protected Routes
+router.get('/HolidayTasks', isAuthenticated, getAllHolidayTasks);  // Requires Authentication
+router.post('/HolidayTasks', createHolidayTask); // Public Route
+router.put('/HolidayTasks/:id', updateHolidayTask); // Public Route
+router.delete('/HolidayTasks/:id', isAuthenticated, deleteHolidayTask);  // Requires Authentication
 
 module.exports = router;

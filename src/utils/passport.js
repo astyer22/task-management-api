@@ -1,28 +1,23 @@
 // src/utils/passport.js
+
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const JWTStrategy = require('passport-jwt').Strategy;
-const ExtractJWT = require('passport-jwt').ExtractJwt;
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');  // Assuming you have a User model
+const GitHubStrategy = require('passport-github2').Strategy;
+require('dotenv').config();  // Ensure you load the environment variables
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:5000/auth/google/callback"
-}, (token, tokenSecret, profile, done) => {
-  User.findOrCreate({ googleId: profile.id }, (err, user) => {
-    return done(err, user);
-  });
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: process.env.GITHUB_CALLBACK_URL || 'http://localhost:3000/auth/github/callback',
+}, (accessToken, refreshToken, profile, done) => {
+  // This is where you would either create a user or retrieve an existing one from the database
+  // For simplicity, we'll just pass the profile along here
+  return done(null, profile);  // You might want to save the profile data to the database
 }));
 
-// JWT Strategy
-passport.use(new JWTStrategy({
-  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET
-}, (jwt_payload, done) => {
-  User.findById(jwt_payload.id, (err, user) => {
-    if (err) return done(err, false);
-    return done(null, user);
-  });
-}));
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});

@@ -1,250 +1,187 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Task Management API",
-    "description": "API for managing regular and holiday tasks.",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": "API for managing tasks and holiday tasks with OAuth (GitHub) authentication."
   },
-  "host": "localhost:3000",
-  "basePath": "/",
-  "schemes": ["http"],
-  "securityDefinitions": {
-    "OAuth2": {
-      "type": "oauth2",
-      "authorizationUrl": "https://your-auth-server.com/oauth/authorize",
-      "tokenUrl": "https://your-auth-server.com/oauth/token",
-      "scopes": {
-        "read": "Read access to protected resources",
-        "write": "Write access to protected resources"
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://localhost:3000/auth/github",  
+            "tokenUrl": "http://localhost:3000/auth/github/callback", 
+            "scopes": {
+              "user": "User profile access"
+            }
+          }
+        }
       }
     }
   },
   "paths": {
-    "/Tasks": {
+    "/tasks/Tasks": {
       "get": {
         "summary": "Get all tasks",
-        "description": "Retrieves a list of all tasks.",
+        "security": [
+          {
+            "bearerAuth": ["user"]
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of tasks"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
       "post": {
         "summary": "Create a new task",
-        "description": "Creates a new task with the provided details.",
-        "parameters": [
+        "security": [
           {
-            "name": "task",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": { "type": "string" },
-                "date": { "type": "string", "format": "date" },
-                "due_date": { "type": "string", "format": "date" },
-                "location": { "type": "string" },
-                "subtasks": {
-                  "type": "array",
-                  "items": { "type": "string" }
-                },
-                "category": { "type": "string" },
-                "completed": { "type": "boolean", "default": false}
-              },
-              "required": ["title", "category"]
-            }
+            "bearerAuth": ["user"]
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Task created"
           },
-          "400": {
-            "description": "Bad Request"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
     },
-    "/Tasks/{id}": {
+    "/tasks/Tasks/{id}": {
       "put": {
-        "summary": "Update task completion status by ID",
-        "description": "Updates the completion status of an existing task identified by its ID.",
-        "parameters": [
+        "summary": "Update a task",
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ID of the task"
-          },
-          {
-            "name": "completed",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "completed": { "type": "boolean" }
-              },
-              "required": ["completed"]
-            }
+            "bearerAuth": ["user"]
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated"
+            "description": "Task updated"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Task not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
       "delete": {
-        "summary": "Delete a task by ID",
-        "description": "Deletes a task identified by its ID.",
-        "parameters": [
+        "summary": "Delete a task",
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ID of the task to delete"
+            "bearerAuth": ["user"]
           }
         ],
         "responses": {
           "200": {
-            "description": "Content Deleted"
+            "description": "Task deleted"
           },
-          "404": {
-            "description": "Task not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
     },
-    "/HolidayTasks": {
+    "/holidayTasks/HolidayTasks": {
       "get": {
         "summary": "Get all holiday tasks",
-        "description": "Retrieves a list of all holiday tasks.",
+        "security": [
+          {
+            "bearerAuth": ["user"]
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of holiday tasks"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
       "post": {
         "summary": "Create a new holiday task",
-        "description": "Creates a new holiday task with the provided details.",
-        "parameters": [
+        "security": [
           {
-            "name": "holidayTask",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": { "type": "string" },
-                "date": { "type": "string", "format": "date" },
-                "location": { "type": "string" },
-                "subtasks": [{ "type": "string" }],
-                "gifts": [{ "type": "string" }],
-                "task_for_who": [{ "type": "string"}],
-                "category": { "type": "string"},
-                "completed": { "type": "boolean", "default": false }
-              },
-              "required": ["title", "date"]
-            }
+            "bearerAuth": ["user"]
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Holiday task created"
           },
-          "400": {
-            "description": "Bad Request"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
     },
-    "/HolidayTasks/{id}": {
+    "/holidayTasks/HolidayTasks/{id}": {
       "put": {
-        "summary": "Update holiday task completion status by ID",
-        "description": "Updates the completion status of an existing holiday task identified by its ID.",
-        "parameters": [
+        "summary": "Update a holiday task",
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ID of the holiday task"
-          },
-          {
-            "name": "completed",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "completed": { "type": "boolean" }
-              },
-              "required": ["completed"]
-            }
+            "bearerAuth": ["user"]
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated"
+            "description": "Holiday task updated"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Holiday Task not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
       "delete": {
-        "summary": "Delete a holiday task by ID",
-        "description": "Deletes a holiday task identified by its ID.",
-        "parameters": [
+        "summary": "Delete a holiday task",
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ID of the holiday task to delete"
+            "bearerAuth": ["user"]
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Holiday task deleted"
           },
-          "404": {
-            "description": "Holiday Task not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/github": {
+      "get": {
+        "summary": "Authenticate via GitHub",
+        "responses": {
+          "200": {
+            "description": "GitHub authentication initiated"
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "summary": "GitHub OAuth callback",
+        "responses": {
+          "200": {
+            "description": "GitHub OAuth callback received"
           }
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
 }
