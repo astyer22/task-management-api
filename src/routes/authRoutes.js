@@ -13,7 +13,11 @@ router.get('/auth/github', (req, res) => {
 
 // Handle the callback after GitHub OAuth
 router.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/profile'); // Redirect user to their profile or another route after successful authentication
+  // Store the access token in session after successful authentication
+  req.session.access_token = req.user.accessToken;  // Save the GitHub access token here
+
+  // Redirect to Swagger UI or another protected route
+  res.redirect('/swagger-ui');  // Redirect to the Swagger UI page (or other routes)
 });
 
 module.exports = router;

@@ -11,8 +11,8 @@
         "type": "oauth2",
         "flows": {
           "authorizationCode": {
-            "authorizationUrl": "http://localhost:3000/auth/github",  
-            "tokenUrl": "http://localhost:3000/auth/github/callback", 
+            "authorizationUrl": "http://localhost:3000/api/auth/github",  
+            "tokenUrl": "http://localhost:3000/api/auth/github/callback", 
             "scopes": {
               "user": "User profile access"
             }
@@ -41,17 +41,9 @@
       },
       "post": {
         "summary": "Create a new task",
-        "security": [
-          {
-            "bearerAuth": ["user"]
-          }
-        ],
         "responses": {
           "201": {
             "description": "Task created"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
@@ -59,33 +51,17 @@
     "/tasks/Tasks/{id}": {
       "put": {
         "summary": "Update a task",
-        "security": [
-          {
-            "bearerAuth": ["user"]
-          }
-        ],
         "responses": {
           "200": {
             "description": "Task updated"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       },
       "delete": {
         "summary": "Delete a task",
-        "security": [
-          {
-            "bearerAuth": ["user"]
-          }
-        ],
         "responses": {
           "200": {
             "description": "Task deleted"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
@@ -109,17 +85,9 @@
       },
       "post": {
         "summary": "Create a new holiday task",
-        "security": [
-          {
-            "bearerAuth": ["user"]
-          }
-        ],
         "responses": {
           "201": {
             "description": "Holiday task created"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
@@ -127,33 +95,17 @@
     "/holidayTasks/HolidayTasks/{id}": {
       "put": {
         "summary": "Update a holiday task",
-        "security": [
-          {
-            "bearerAuth": ["user"]
-          }
-        ],
         "responses": {
           "200": {
             "description": "Holiday task updated"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       },
       "delete": {
         "summary": "Delete a holiday task",
-        "security": [
-          {
-            "bearerAuth": ["user"]
-          }
-        ],
         "responses": {
           "200": {
             "description": "Holiday task deleted"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
@@ -178,10 +130,5 @@
         }
       }
     }
-  },
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ]
+  }
 }

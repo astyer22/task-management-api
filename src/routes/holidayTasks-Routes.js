@@ -7,8 +7,8 @@ const router = express.Router();
 
 // Protected Routes
 router.get('/HolidayTasks', isAuthenticated, getAllHolidayTasks);  // Requires Authentication
-router.post('/HolidayTasks', createHolidayTask); // Public Route
-router.put('/HolidayTasks/:id', updateHolidayTask); // Public Route
-router.delete('/HolidayTasks/:id', isAuthenticated, deleteHolidayTask);  // Requires Authentication
+router.post('/HolidayTasks', createHolidayTask); 
+router.put('/HolidayTasks/:id', updateHolidayTask); 
+router.delete('/HolidayTasks/:id', deleteHolidayTask);  
 
 module.exports = router;

@@ -7,8 +7,8 @@ const router = express.Router();
 
 // Protected Routes
 router.get('/Tasks', isAuthenticated, getAllTasks);  // Requires Authentication
-router.post('/Tasks', createTask); // Public Route
-router.put('/Tasks/:id', updateTask); // Public Route
-router.delete('/Tasks/:id', isAuthenticated, deleteTask);  // Requires Authentication
+router.post('/Tasks', createTask);
+router.put('/Tasks/:id', updateTask);
+router.delete('/Tasks/:id', deleteTask);  
 
 module.exports = router;
