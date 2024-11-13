@@ -12,6 +12,11 @@ passport.use(new GitHubStrategy({
   callbackURL: process.env.GITHUB_CALLBACK_URL || 'http://localhost:3000/auth/github/callback',
 }, async (accessToken, refreshToken, profile, done) => {
   try {
+    // Log the profile and tokens to see if they're being received correctly
+    console.log("GitHub Profile:", profile);
+    console.log("Access Token:", accessToken);
+    console.log("Refresh Token:", refreshToken);
+
     // Find the user by GitHub ID
     let user = await User.findOne({ githubId: profile.id });
 
@@ -20,7 +25,7 @@ passport.use(new GitHubStrategy({
       user = new User({
         githubId: profile.id,
         displayName: profile.displayName || profile.username,
-        email: profile.emails[0].value, // GitHub may not always provide email, so check your app's permissions
+        email: profile.emails && profile.emails[0] ? profile.emails[0].value : 'No email provided',
         accessToken,
         refreshToken,
       });
@@ -31,6 +36,7 @@ passport.use(new GitHubStrategy({
     // Pass the user to the `done` callback
     return done(null, user);
   } catch (err) {
+    console.error("Error during GitHub authentication:", err);
     return done(err);
   }
 }));
@@ -44,6 +50,7 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findById(id);
     done(null, user);
   } catch (err) {
+    console.error("Error during user deserialization:", err);
     done(err, null);
   }
 });
