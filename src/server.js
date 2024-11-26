@@ -1,11 +1,12 @@
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
-const axios = require('axios');  // Import axios for API requests
+const axios = require('axios');  // For API requests
+const cors = require('cors');   // Import cors middleware
 const connectDB = require('./db/database');
 const taskRoutes = require('./routes/tasksRoutes');
 const holidayTaskRoutes = require('./routes/holidayTasks-Routes');
-const authRoutes = require('./routes/authRoutes'); // Import auth routes
+const authRoutes = require('./routes/authRoutes'); // Authentication routes
 require('dotenv').config();
 require('./utils/passport');  // Initialize passport strategies
 
@@ -18,60 +19,51 @@ const PORT = process.env.PORT || 3000;
 // Connect to the database
 connectDB();
 
-// Middleware
+// Middleware for parsing JSON requests
 app.use(express.json());
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'your_session_secret',
-  resave: false,
-  saveUninitialized: true
-}));
+
+// CORS Configuration
+const corsOptions = {
+  origin: 'http://localhost:3000',  // Allow requests from Swagger UI domain
+  credentials: true,               // Allow cookies (for session-based authentication)
+};
+app.use(cors(corsOptions));
+
+// Session Configuration
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'your_session_secret',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// Passport Initialization
 app.use(passport.initialize());
-app.use(passport.session()); // Persist session for authentication
+app.use(passport.session());
 
-// GitHub OAuth callback route
-app.get('/api/auth/github/callback', async (req, res) => {
-  const { code } = req.query; // Get the code from the query params
-
-  try {
-    // Exchange the code for an access token
-    const response = await axios.post('https://github.com/login/oauth/access_token', {
-      client_id: process.env.GITHUB_CLIENT_ID,
-      client_secret: process.env.GITHUB_CLIENT_SECRET,
-      code,
-    }, {
-      headers: {
-        'Accept': 'application/json',
-      },
-    });
-
-    const { access_token } = response.data;  // GitHub will return the access token
-
-    if (!access_token) {
-      return res.status(500).send('Failed to get GitHub access token');
-    }
-
-    // Store the access token in session or a secure cookie
-    req.session.github_token = access_token;
-
-    // Redirect the user back to Swagger UI (or your desired page)
-    res.redirect('/swagger-ui');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error during GitHub OAuth token exchange');
+// GitHub OAuth Callback
+app.get(
+  '/api/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Store GitHub token securely in session
+    req.session.github_token = req.user.accessToken;
+    res.redirect('/swagger-ui');  // Redirect after successful auth
   }
-});
+);
 
 // Routes
 app.use('/', authRoutes); // Authentication routes
 app.use('/tasks', taskRoutes); // Task routes (protected)
 app.use('/holidayTasks', holidayTaskRoutes); // Holiday Task routes (protected)
 
-// Swagger API Documentation with Token Injection
+// Swagger UI with Token Injection
 app.use('/swagger-ui', (req, res) => {
-  const token = req.session.github_token; // Retrieve token from session
+  const token = req.session.github_token;
 
   if (token) {
-    // Dynamically generate Swagger UI with the token injected into the requestInterceptor
+    // Dynamically generate Swagger UI with injected token
     res.send(`
       <html>
         <head>
@@ -94,8 +86,9 @@ app.use('/swagger-ui', (req, res) => {
               plugins: [
                 SwaggerUIBundle.plugins.DownloadUrl
               ],
-              requestInterceptor: (req) => {
-                req.headers['Authorization'] = 'Bearer ' + "${token}";  // Inject token into the header
+             requestInterceptor: (req) => {
+              console.log('Injecting Authorization Header:', req);
+                req.headers['Authorization'] = 'Bearer ' + "${token}";
                 return req;
               }
             });
@@ -104,15 +97,15 @@ app.use('/swagger-ui', (req, res) => {
       </html>
     `);
   } else {
-    // If no token, redirect to login or another page
+    // Redirect to login if no token is available
     res.redirect('/login');
   }
 });
 
-// Swagger API Documentation Setup
+// Swagger API Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Start the server
+// Start the Server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
