@@ -65,7 +65,9 @@
           "201": { "description": "Created" },
           "400": { "description": "Bad Request" }
         }
-      },
+      }
+    },
+    "/tasks/{taskId}": {
       "put": {
         "summary": "Update an existing task",
         "description": "Updates the details of an existing task.",
@@ -172,7 +174,9 @@
           "201": { "description": "Created" },
           "400": { "description": "Bad Request" }
         }
-      },
+      }
+    },
+    "/holidayTasks/{holidayTaskId}": {
       "put": {
         "summary": "Update an existing holiday task",
         "description": "Updates the details of an existing holiday task.",

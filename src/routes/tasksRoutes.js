@@ -6,9 +6,9 @@ const isAuthenticated = require('../utils/isAuthenticated');  // Import the auth
 const router = express.Router();
 
 // Protected Routes
-router.get('/tasks', isAuthenticated, getAllTasks);  // Requires Authentication
-router.post('/tasks', createTask);
-router.put('/tasks/:id', updateTask);
-router.delete('/tasks/:id', deleteTask);  
+router.get('/', isAuthenticated, getAllTasks);  // Requires Authentication
+router.post('/', createTask);
+router.put('/:id', updateTask);
+router.delete('/:id', deleteTask);  
 
 module.exports = router;

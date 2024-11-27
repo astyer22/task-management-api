@@ -12,7 +12,7 @@ POST http://localhost:3000/Tasks
 Content-Type: application/json
 
 {
-    "title": "Walk the dog",
+    "title": "Walk the horse",
     "date": "2024-10-28",
     "due_date": "2024-11-05",
     "location": "The park",
@@ -22,21 +22,21 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/Tasks/672699ef235b00536e0be5dc
+PUT http://localhost:3000/Tasks/6745d0b1cba34d78c381799f
 Content-Type: application/json
 
 {
-    "title": "Walk the cat",
+    "title": "Butcher the horse",
     "date": "2024-10-28",
     "due_date": "2024-11-05",
-    "location": "The park",
-    "subtasks": ["Put on the leash", "Bring poop bags"],
-    "category": "Pet",
+    "location": "The butcher",
+    "subtasks": ["Cut the meat", "Pack the meat"],
+    "category": "Meat",
     "completed": false
 }
 
 ###
-DELETE http://localhost:3000/Tasks/672699ef235b00536e0be5dc
+DELETE http://localhost:3000/Tasks/6745d0cecba34d78c38179a1
 Accept: application/json
 
 {
