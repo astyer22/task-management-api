@@ -6,7 +6,7 @@ const isAuthenticated = require('../utils/isAuthenticated'); // Authentication m
 const router = express.Router();
 
 // Protected Routes
-router.get('/', isAuthenticated, getAllHolidayTasks);  // Requires Authentication
+router.get('/', getAllHolidayTasks);  // Requires Authentication
 router.post('/', createHolidayTask); 
 router.put('/:id', updateHolidayTask); 
 router.delete('/:id', deleteHolidayTask);  

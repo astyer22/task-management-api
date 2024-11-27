@@ -127,11 +127,6 @@
       "get": {
         "summary": "Get all holiday tasks",
         "description": "Retrieves a list of holiday-specific tasks.",
-        "security": [
-          {
-            "oauth2": ["read:holidayTasks"]
-          }
-        ],
         "responses": {
           "200": { "description": "OK" },
           "500": { "description": "Internal Server Error" }
